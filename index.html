@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高伊 · PORTFOLIO</title>
+<meta name="description" content="高伊的个人作品集：营销策划、IP营销、内容运营与文学创作。">
+<style>
+  /* 设计语言对齐作品集 PDF：奶油底 / 墨黑 / 酒红强调 / 衬线大字 / 细线 / 低对比水印字，无图形装饰 */
+  :root{
+    --paper:#f6f0e4;      /* 奶油底，取自作品集封面 */
+    --ink:#1c1a17;
+    --ink-soft:#5a544a;
+    --wine:#8e3b35;       /* 作品集数据强调色（酒红） */
+    --watermark:#ece2ce;  /* 背景大水印字（比纸深一档） */
+    --line:#d9cfba;       /* 细线 */
+    --card:#fdfbf6;       /* 白卡片浮层 */
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+    line-height:1.9;
+    font-size:15px;
+  }
+  .serif{font-family:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;}
+  .cn-serif{font-family:"Songti SC","STSong","SimSun","Noto Serif SC",serif;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- 封面 Hero：复刻作品集封面构图 ---------- */
+  .hero{padding:88px 0 64px;position:relative;}
+  .hero-grid{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;flex-wrap:wrap;}
+  .hero-left .name-cn{font-size:20px;letter-spacing:.55em;font-weight:600;}
+  .hero-left h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(64px,11vw,124px);
+    letter-spacing:.01em;line-height:1.02;font-weight:700;
+    margin:6px 0 20px;
+  }
+  .hero-left .sub{font-size:13.5px;letter-spacing:.42em;color:var(--ink-soft);}
+  .hero-left .intro{margin-top:30px;max-width:520px;color:var(--ink-soft);font-size:14.5px;}
+  .hero-left .intro b{color:var(--ink);}
+
+  /* 数据列表：复刻封面左下酒红数据块 */
+  .data-list{min-width:280px;}
+  .data-item{padding:13px 2px 11px;border-bottom:1px solid var(--ink);margin-bottom:2px;}
+  .data-item .num{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--wine);font-weight:700;font-size:21px;letter-spacing:.06em;
+  }
+  .data-item .lbl{display:block;font-size:12.5px;color:var(--ink);letter-spacing:.22em;margin-top:2px;}
+  .data-item:first-child{border-top:1px solid var(--ink);padding-top:15px;}
+
+  /* ---------- 章节通用：低对比水印大字 + 细线标题 ---------- */
+  section{position:relative;padding:84px 0 10px;}
+  .wm{
+    position:absolute;left:-14px;top:34px;z-index:0;
+    font-family:Georgia,serif;font-weight:700;
+    font-size:clamp(88px,15vw,168px);line-height:1;
+    color:var(--watermark);letter-spacing:.02em;
+    user-select:none;pointer-events:none;
+  }
+  .sec-inner{position:relative;z-index:1;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:42px;}
+  .sec-title{font-size:26px;letter-spacing:.34em;font-weight:700;}
+  .sec-en{font-family:Georgia,serif;font-size:13px;letter-spacing:.3em;color:var(--wine);}
+  .sec-rule{flex:1;height:1px;background:var(--ink);opacity:.75;margin-left:6px;}
+
+  /* ---------- 经历：纯排版 + 细线，无卡片 ---------- */
+  .exp-item{
+    display:flex;gap:40px;padding:34px 2px;border-bottom:1px solid var(--line);
+  }
+  .exp-item:first-of-type{border-top:1px solid var(--ink);}
+  .exp-time{
+    min-width:168px;font-family:Georgia,"Songti SC",serif;
+    color:var(--wine);font-size:14px;letter-spacing:.12em;line-height:1.9;
+  }
+  .exp-body h3{font-size:19px;font-weight:700;letter-spacing:.08em;}
+  .exp-body h3 small{font-weight:400;font-size:13px;color:var(--ink-soft);margin-left:14px;letter-spacing:.2em;}
+  .exp-body p{margin-top:10px;color:var(--ink-soft);font-size:14.5px;max-width:640px;}
+  .exp-body p b{color:var(--wine);font-weight:700;}
+
+  /* ---------- 作品集 ---------- */
+  .works-links{margin-bottom:30px;}
+  .work-link{
+    display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+    padding:17px 2px 15px;border-bottom:1px solid var(--line);
+    text-decoration:none;color:var(--ink);transition:.18s;
+  }
+  .work-link:first-of-type{border-top:1px solid var(--ink);}
+  .work-link .t{font-size:16.5px;letter-spacing:.12em;font-weight:600;}
+  .work-link .t i{
+    font-style:normal;font-family:Georgia,serif;
+    color:var(--wine);margin-right:16px;font-size:13.5px;letter-spacing:.15em;
+  }
+  .work-link .m{font-size:12.5px;color:var(--ink-soft);letter-spacing:.18em;white-space:nowrap;}
+  .work-link:hover .t{color:var(--wine);}
+
+  .pv-box{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+  .pv-tabs{display:flex;border-bottom:1px solid var(--line);flex-wrap:wrap;background:var(--paper);}
+  .pv-tab{
+    padding:13px 24px;font-size:13.5px;letter-spacing:.14em;cursor:pointer;
+    border:none;background:transparent;color:var(--ink-soft);position:relative;
+    font-family:inherit;
+  }
+  .pv-tab.active{color:var(--wine);font-weight:700;}
+  .pv-tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--wine);}
+  .pv-frame iframe{width:100%;height:620px;border:none;display:block;background:#565049;}
+  .pv-tip{padding:11px 20px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);letter-spacing:.06em;}
+
+  /* ---------- 文学创作：纯文字列表 ---------- */
+  .wr-list{max-width:680px;}
+  .wr{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 2px 14px;border-bottom:1px solid var(--line);
+    text-decoration:none;color:var(--ink);transition:.18s;
+  }
+  .wr:first-of-type{border-top:1px solid var(--ink);}
+  .wr h4{font-size:18px;letter-spacing:.3em;font-weight:600;}
+  .wr span{font-size:12px;color:var(--ink-soft);letter-spacing:.25em;}
+  .wr:hover{color:var(--wine);}
+  .wr:hover h4{letter-spacing:.36em;}
+
+  /* ---------- 联系：奶油底纯排版，无色块 ---------- */
+  .contact{padding:96px 0 30px;text-align:center;}
+  .contact .en{font-family:Georgia,serif;font-size:13px;letter-spacing:.5em;color:var(--wine);}
+  .contact h2{font-size:24px;letter-spacing:.5em;margin:14px 0 22px;font-weight:700;}
+  .contact .mail{
+    font-family:Georgia,serif;color:var(--ink);text-decoration:none;
+    font-size:17px;letter-spacing:.08em;border-bottom:1px solid var(--wine);
+    padding-bottom:3px;transition:.18s;
+  }
+  .contact .mail:hover{color:var(--wine);}
+
+  footer{
+    padding:44px 0 52px;text-align:center;
+    font-size:11.5px;color:var(--ink-soft);letter-spacing:.35em;
+  }
+  footer .rule{width:36px;height:1px;background:var(--ink);margin:0 auto 22px;opacity:.7;}
+
+  @media(max-width:720px){
+    .hero{padding:56px 0 40px;}
+    .hero-grid{flex-direction:column;align-items:flex-start;gap:30px;}
+    .exp-item{flex-direction:column;gap:8px;padding:28px 2px;}
+    .exp-time{min-width:0;}
+    .pv-frame iframe{height:440px;}
+    .work-link{flex-direction:column;gap:4px;align-items:flex-start;}
+    .wm{top:14px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 封面：复刻作品集封面（高伊 / PORTFOLIO / 酒红数据列表） -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <div class="name-cn cn-serif">高 伊</div>
+      <h1 class="serif">PORTFOLIO</h1>
+      <div class="sub">营销策划 · IP营销 · 内容运营 · 文学创作</div>
+      <p class="intro">
+        湘潭大学（双一流）历史学，2027 届。从大一开始帮学校旁的糖葫芦店从 0 到 1 做线上生意，
+        <b>零投流两个月变现 5 万+</b>；后在爱奇艺统筹 IP 营销企划。
+        我擅长的事一句话说完：<b>把内容做成流量，把流量变成生意。</b>
+      </p>
+    </div>
+    <div class="data-list">
+      <div class="data-item"><span class="num">¥50,000+</span><span class="lbl">零投流单月私域变现</span></div>
+      <div class="data-item"><span class="num">10W+</span><span class="lbl">社交平台矩阵藏量</span></div>
+      <div class="data-item"><span class="num">2.5W+</span><span class="lbl">全网互动次 · 单日粉丝净增峰值</span></div>
+      <div class="data-item"><span class="num">30+</span><span class="lbl">品牌商单合作 · 对接品牌公关</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 经历 -->
+  <section id="exp">
+    <div class="wm" aria-hidden="true">ABOUT</div>
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-en">01 / EXPERIENCE</span>
+        <h2 class="sec-title cn-serif">经历</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-time serif">2026.04 — 2026.07<br>上海</div>
+        <div class="exp-body">
+          <h3>爱奇艺 · IP营销策划实习生<small>内容 × 商业化</small></h3>
+          <p>统筹《两京十五日》营销企划，打通微信、小红书、抖音三端媒介，以低成本互动玩法撬动粉丝 UGC，创<b>单日粉丝净增峰值</b>；主导官方抖音号「夷路生花」0→1 冷启动，单月 2.4 万赞；运营「爱奇艺乐园」小红书累计获赞 10 万+，落地线上种草到线下游园的 O2O 闭环。</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-time serif">2026.01 — 2026.03<br>长沙</div>
+        <div class="exp-body">
+          <h3>长沙晚报 · 经济新闻部采编<small>深度内容 × 议题设置</small></h3>
+          <p>独立负责长沙奥体中心等市级重点项目深度报道，单篇最高阅读 <b>9.5 万+</b>，系列报道稳定在 7.9w–10.1w 高位区间。官媒训练留下两样东西：对公共情绪的抓取力，对复杂议题的拆解力。</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-time serif">2023.10 — 2025.05<br>湘潭</div>
+        <div class="exp-body">
+          <h3>萌妈糖葫芦 · 增长运营与渠道变现<small>19 个月 · 从 0 到 1</small></h3>
+          <p>拆解 10+ 头部竞品确立「绝佳味道与高性价比」定位，单篇最高浏览 3 万+、累计 10 万+曝光；沉淀 <b>4000+ 私域用户</b>于 11 个核心社群；对接 30+ 品牌公关完成商单植入，独立制作下单小程序缩短转化路径。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品集 -->
+  <section id="works">
+    <div class="wm" aria-hidden="true">WORKS</div>
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-en">02 / PORTFOLIO</span>
+        <h2 class="sec-title cn-serif">作品集</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="works-links">
+        <a class="work-link" href="assets/portfolio-preview.pdf" target="_blank" rel="noopener">
+          <span class="t"><i>VOL.01</i>运营策划作品集</span><span class="m">在线预览版 · 2.5MB</span>
+        </a>
+        <a class="work-link" href="assets/portfolio-operations-full.pdf" download>
+          <span class="t"><i>VOL.02</i>运营策划作品集 · 完整版</span><span class="m">下载 · 21MB</span>
+        </a>
+        <a class="work-link" href="assets/portfolio-planning-full.pdf" download>
+          <span class="t"><i>VOL.03</i>策划作品集</span><span class="m">下载 · 41MB</span>
+        </a>
+      </div>
+
+      <div class="pv-box">
+        <div class="pv-tabs">
+          <button class="pv-tab active" data-src="assets/portfolio-preview.pdf">运营策划 · 预览</button>
+          <button class="pv-tab" data-src="assets/portfolio-operations-full.pdf">运营策划 · 完整版</button>
+          <button class="pv-tab" data-src="assets/portfolio-planning-full.pdf">策划作品集 · 完整版</button>
+        </div>
+        <div class="pv-frame">
+          <iframe id="pv" src="assets/portfolio-preview.pdf" title="作品集预览" loading="lazy"></iframe>
+        </div>
+        <div class="pv-tip">完整版文件较大，首次加载请稍候；手机浏览器建议点击上方条目在新窗口阅读。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 文学创作 -->
+  <section id="writing">
+    <div class="wm" aria-hidden="true">ESSAY</div>
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-en">03 / WRITING</span>
+        <h2 class="sec-title cn-serif">文学创作</h2>
+        <span class="sec-rule"></span>
+      </div>
+      <p style="color:var(--ink-soft);font-size:14px;margin:-14px 0 30px;max-width:600px;letter-spacing:.04em;">
+        历史系出身，写作是老本行。营销训练我讲人话，文学训练我讲真话。
+      </p>
+      <div class="wr-list">
+        <a class="wr" href="assets/writing/fo.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">佛</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/yu.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">鱼</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/beijingxi.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">北京西</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/yiyelian.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">一叶莲</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/xiaoyangchun.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">小阳春</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/yuegui.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">月桂</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/shimeng.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">湿梦</h4><span>散文</span></a>
+        <a class="wr" href="assets/writing/yangtai-baihe.pdf" target="_blank" rel="noopener"><h4 class="cn-serif">阳台上的百合</h4><span>散文</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <div class="contact" id="contact">
+    <div class="en">CONTACT</div>
+    <h2 class="cn-serif">来 谈 个 合 作</h2>
+    <a class="mail" href="mailto:1575019829@qq.com">1575019829@qq.com</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="rule"></div>
+  © 2026 高伊 · 本页由本人维护 · 最后更新 2026.10
+</footer>
+
+<script>
+  var tabs = document.querySelectorAll('.pv-tab');
+  var frame = document.getElementById('pv');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){x.classList.remove('active');});
+      t.classList.add('active');
+      frame.src = t.getAttribute('data-src');
+    });
+  });
+</script>
+</body>
+</html>
